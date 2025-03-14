@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lahore Scholars Academy - Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+            margin: 0;
+        }
+        
+        .calculator {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+        }
+        
+        .calculator-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .calculator-header h1 {
+            color: #4a4a4a;
+            font-size: 24px;
+            margin: 0;
+        }
+        
+        .calculator-header p {
+            color: #777;
+            font-size: 14px;
+            margin: 5px 0 0;
+        }
+        
+        .display {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            padding: 10px;
+            text-align: right;
+            font-size: 24px;
+            height: 40px;
+            overflow: hidden;
+        }
+        
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+        }
+        
+        button {
+            background-color: #f0f0f0;
+            border: none;
+            border-radius: 5px;
+            color: #333;
+            cursor: pointer;
+            font-size: 18px;
+            height: 50px;
+            transition: background-color 0.2s;
+        }
+        
+        button:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .operator {
+            background-color: #f8d35e;
+            color: #333;
+        }
+        
+        .operator:hover {
+            background-color: #f5c431;
+        }
+        
+        .equals {
+            background-color: #4caf50;
+            color: white;
+        }
+        
+        .equals:hover {
+            background-color: #3d9140;
+        }
+        
+        .clear {
+            background-color: #ff5252;
+            color: white;
+        }
+        
+        .clear:hover {
+            background-color: #e04545;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="calculator-header">
+            <h1>Lahore Scholars Academy</h1>
+            <p>Simple Calculator</p>
+        </div>
+        <div class="display" id="display">0</div>
+        <div class="buttons">
+            <button class="clear" onclick="clearDisplay()">C</button>
+            <button onclick="appendToDisplay('(')">(</button>
+            <button onclick="appendToDisplay(')')">)</button>
+            <button class="operator" onclick="appendToDisplay('/')">/</button>
+            
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button class="operator" onclick="appendToDisplay('*')">×</button>
+            
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button class="operator" onclick="appendToDisplay('-')">-</button>
+            
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button class="operator" onclick="appendToDisplay('+')">+</button>
+            
+            <button onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('.')">.</button>
+            <button onclick="backspace()">⌫</button>
+            <button class="equals" onclick="calculate()">=</button>
+        </div>
+        <div class="footer">
+            &copy; 2025 Lahore Scholars Academy
+        </div>
+    </div>
+
+    <script>
+        let displayValue = '0';
+        const display = document.getElementById('display');
+        
+        function updateDisplay() {
+            display.textContent = displayValue;
+        }
+        
+        function appendToDisplay(value) {
+            if (displayValue === '0' && value !== '.') {
+                displayValue = value;
+            } else {
+                displayValue += value;
+            }
+            updateDisplay();
+        }
+        
+        function clearDisplay() {
+            displayValue = '0';
+            updateDisplay();
+        }
+        
+        function backspace() {
+            if (displayValue.length > 1) {
+                displayValue = displayValue.slice(0, -1);
+            } else {
+                displayValue = '0';
+            }
+            updateDisplay();
+        }
+        
+        function calculate() {
+            try {
+                displayValue = eval(displayValue).toString();
+            } catch (error) {
+                displayValue = 'Error';
+            }
+            updateDisplay();
+        }
+    </script>
+</body>
+</html>
